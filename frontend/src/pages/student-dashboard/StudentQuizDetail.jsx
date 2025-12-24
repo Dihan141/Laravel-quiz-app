@@ -13,8 +13,12 @@ import {
   Container,
   Divider,
 } from "@mui/material";
-import { useFetch } from "../hooks/useFetch";
-import api from "../api";
+import LockIcon from "@mui/icons-material/Lock";
+import Person4Icon from "@mui/icons-material/Person4";
+import TimerIcon from "@mui/icons-material/Timer";
+import { useFetch } from "../../hooks/useFetch";
+import api from "../../api";
+import DiscussionSection from "./components/DiscussionSection";
 
 export default function StudentQuizDetail() {
   const navigate = useNavigate();
@@ -87,13 +91,19 @@ export default function StudentQuizDetail() {
               {quiz.title}
             </Typography>
 
-            <Typography color="text.secondary">
-              Teacher: {quiz.teacher_name}
-            </Typography>
+            <Box display="flex" gap={1}>
+              <Person4Icon sx={{ color: "text.secondary" }} />
+              <Typography color="text.secondary">
+                {quiz.teacher_name}
+              </Typography>
+            </Box>
 
-            <Typography color="text.secondary">
-              Duration: {quiz.time_limit} minutes
-            </Typography>
+            <Box display="flex" gap={1} mt={1}>
+              <TimerIcon sx={{ color: "text.secondary" }} />
+              <Typography color="text.secondary">
+                {quiz.time_limit} minutes
+              </Typography>
+            </Box>
 
             <Button
               variant="contained"
@@ -109,8 +119,46 @@ export default function StudentQuizDetail() {
         {/* Tabs */}
         <Tabs value={tab} onChange={(e, v) => setTab(v)} sx={{ mb: 2 }}>
           <Tab label="Quiz Details" />
-          <Tab label="Answers" disabled={!hasAttempted} />
-          <Tab label="Discussion" disabled={!hasAttempted} />
+          <Tab
+            label="Answers"
+            disabled={!hasAttempted}
+            icon={
+              !hasAttempted ? (
+                <LockIcon
+                  fontSize="small"
+                  sx={{ height: "15px", width: "15px", mt: "-3px" }}
+                />
+              ) : null
+            }
+            iconPosition="end"
+            sx={{
+              minHeight: 48,
+              py: 0,
+              "& .MuiTab-iconWrapper": {
+                marginBottom: 0,
+              },
+            }}
+          />
+          <Tab
+            label="Discussion"
+            disabled={!hasAttempted}
+            icon={
+              !hasAttempted ? (
+                <LockIcon
+                  fontSize="small"
+                  sx={{ height: "15px", width: "15px", mt: "-3px" }}
+                />
+              ) : null
+            }
+            iconPosition="end"
+            sx={{
+              minHeight: 48,
+              py: 0,
+              "& .MuiTab-iconWrapper": {
+                marginBottom: 0,
+              },
+            }}
+          />
         </Tabs>
 
         <Divider sx={{ mb: 2 }} />
@@ -184,9 +232,7 @@ export default function StudentQuizDetail() {
         {tab === 2 && hasAttempted && (
           <Box>
             <Typography variant="h6">Discussion</Typography>
-            <Typography color="text.secondary">
-              Discussion feature coming soon.
-            </Typography>
+            <DiscussionSection quizId={quizId} active={tab === 2} />
           </Box>
         )}
       </Box>

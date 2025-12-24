@@ -11,7 +11,7 @@ import {
   FormControlLabel,
   CircularProgress,
 } from "@mui/material";
-import api from "../api";
+import api from "../../api";
 
 export default function QuizAttempt() {
   const { quizId } = useParams();

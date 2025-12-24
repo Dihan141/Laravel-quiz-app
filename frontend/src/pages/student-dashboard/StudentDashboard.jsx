@@ -1,4 +1,4 @@
-import StudentDashboardNavbar from "../components/StudentDashboardNavbar";
+import StudentDashboardNavbar from "../../components/StudentDashboardNavbar";
 import Person4Icon from "@mui/icons-material/Person4";
 import TimerIcon from "@mui/icons-material/Timer";
 import {
@@ -14,7 +14,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useState } from "react";
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {

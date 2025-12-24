@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuizAnalyticsController;
 use App\Http\Controllers\QuizAttemptController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizDiscussionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TeacherOptionController;
@@ -23,6 +24,10 @@ Route::middleware('auth:sanctum')->group(function () {
             'roles' => $request->user()->roles->pluck('name')
         ]);
     });
+
+    //Quiz Discussions
+    Route::get('/quizzes/{quiz}/discussions', [QuizDiscussionController::class, 'index']);
+    Route::post('/quizzes/{quiz}/discussions', [QuizDiscussionController::class, 'store']);
 });
 
 Route::middleware(['auth:sanctum', 'role:student'])->group(function () {

@@ -2,10 +2,10 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import { useAuthContext } from "./hooks/useAuthContext";
-import StudentDashboard from "./pages/studentDashboard";
+import StudentDashboard from "./pages/student-dashboard/studentDashboard";
 import TeacherDashboard from "./pages/teacher-dashboard/TeacherDashboard";
-import StudentQuizDetail from "./pages/StudentQuizDetail";
-import QuizAttempt from "./pages/QuizAttempt";
+import StudentQuizDetail from "./pages/student-dashboard/StudentQuizDetail";
+import QuizAttempt from "./pages/student-dashboard/QuizAttempt";
 import QuizAnalyticsPage from "./pages/teacher-dashboard/QuizAnalyticsPage";
 
 const theme = createTheme({
