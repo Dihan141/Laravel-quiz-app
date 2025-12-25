@@ -12,17 +12,24 @@ import {
   Avatar,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuizDiscussions } from "../../../hooks/useQuizDiscussions";
 import { stringToColor } from "../../../helpers/AssignAvatarColor";
 
 export default function QuizDiscussionDialog({ open, onClose, quiz }) {
   const [message, setMessage] = useState("");
+  const scrollRef = useRef(null);
 
   const { discussions, loading, posting, postDiscussion } = useQuizDiscussions(
     quiz.id,
     open
   );
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [discussions]);
 
   const handleSend = async () => {
     if (!message.trim()) return;
@@ -49,6 +56,7 @@ export default function QuizDiscussionDialog({ open, onClose, quiz }) {
             gap={2}
             maxHeight={400}
             overflow="auto"
+            ref={scrollRef}
           >
             {discussions.map((d) => (
               <Box key={d.id}>
